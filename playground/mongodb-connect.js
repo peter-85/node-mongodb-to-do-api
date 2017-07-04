@@ -29,10 +29,19 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     //     console.log(JSON.stringify(results.ops, undefined, 2));
     // });
 
+    db.createCollection("Users", {
+        validator: {
+            $or: [
+                { name: { $type: "string", $exists: true } },
+                { age: { $type: "number", $exists: true } }
+            ]
+        }
+    })
+
     let users = db.collection('Users');
     users.insertOne({
-        name: 'Maya',
-        age: 30,
+        // name: 'Sara Erani',
+        age: 35,
         location: 'Sofia'
     }, (err, results) => {
         if (err) {
