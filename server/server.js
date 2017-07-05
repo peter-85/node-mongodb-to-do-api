@@ -8,6 +8,7 @@ let { User } = require('./models/user');
 
 
 let app = express();
+const port = process.env.PORT || 3010; // setting for Heroku
 
 app.use(bodyParser.json()); // using middleware to parse json in body of the request
 
@@ -46,8 +47,8 @@ app.get('/todos/:id', (req, res) => {
     })
 })
 
-app.listen(3010, () => {
-    console.log('Started on port 3010');
+app.listen(port, () => {
+    console.log(`Started at port ${port}`);
 });
 
 module.exports = { app };
